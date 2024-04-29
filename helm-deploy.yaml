@@ -6,7 +6,7 @@ metadata:
 spec:
   syncPolicy:
      automated: 
-       #prune: true
+       prune: true
        selfHeal: true
   project: default
   # directory:
