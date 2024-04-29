@@ -4,6 +4,10 @@ metadata:
   name: helm-guestbook
   namespace: argocd 
 spec:
+  syncPolicy:
+     automated: 
+       #prune: true
+       selfHeal: true
   project: default
   # directory:
   #     recurse: true 
@@ -12,9 +16,11 @@ spec:
     path: helm-guestbook
     helm:
       releaseName: helm-guestbook
-      parameters:
-      - name: "replicaCount"
-        value: "2"
+      valueFiles:
+      - values.yaml
+      #parameters:
+      # - name: "replicaCount"
+      #   value: "2"
       # valuesObject:
       #   replicaCount: 2 # didn't work for me
   destination:
