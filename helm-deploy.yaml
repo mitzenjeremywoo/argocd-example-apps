@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-guestbook
+  namespace: argocd 
+spec:
+  project: default
+  # directory:
+  #     recurse: true 
+  source:
+    repoURL: https://github.com/mitzenjeremywoo/argocd-example-apps.git
+    path: helm-guestbook
+    helm:
+      releaseName: helm-guestbook
+      parameters:
+      - name: "replicaCount"
+        value: "2"
+      # valuesObject:
+      #   replicaCount: 2 # didn't work for me
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: default
